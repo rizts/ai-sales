@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('sales_pages', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('product_name');
-            $table->text('description');
-            $table->string('target_audience');
-            $table->enum('status', ['pending', 'processing', 'completed', 'failed'])->default('pending');
-            $table->longText('generated_content')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->string('title');
+            $table->json('input_data');
+            $table->json('generated_content')->nullable();
+            $table->enum('status', ['pending', 'processing', 'done', 'failed'])->default('pending');
             $table->timestamps();
         });
     }

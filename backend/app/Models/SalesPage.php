@@ -8,11 +8,15 @@ class SalesPage extends Model
 {
     protected $fillable = [
         'user_id',
-        'product_name',
-        'description',
-        'target_audience',
-        'status',
+        'title',
+        'input_data',
         'generated_content',
+        'status',
+    ];
+
+    protected $casts = [
+        'input_data' => 'array',
+        'generated_content' => 'array',
     ];
 
     public function user()
