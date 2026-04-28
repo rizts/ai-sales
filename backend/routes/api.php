@@ -13,4 +13,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    Route::get('/pages', [\App\Http\Controllers\SalesPageController::class, 'index']);
+    Route::post('/pages', [\App\Http\Controllers\SalesPageController::class, 'store']);
+    Route::get('/pages/{id}', [\App\Http\Controllers\SalesPageController::class, 'show']);
+    Route::delete('/pages/{id}', [\App\Http\Controllers\SalesPageController::class, 'destroy']);
+    Route::post('/pages/{id}/regenerate', [\App\Http\Controllers\SalesPageController::class, 'regenerate']);
 });
