@@ -61,8 +61,9 @@ export default function CreateSalesPage() {
   };
 
   return (
-    <div className="max-w-2xl p-8 mx-auto mt-10 bg-white rounded-lg shadow">
-      <h1 className="mb-6 text-2xl font-bold">Create New Sales Page</h1>
+    <div className="max-w-2xl px-4 py-8 mx-auto sm:px-6 lg:px-8 sm:py-10">
+      <div className="p-6 bg-white rounded-lg shadow sm:p-8">
+        <h1 className="mb-6 text-2xl font-bold">Create New Sales Page</h1>
       
       {error && <div className="p-3 mb-4 text-red-700 bg-red-100 rounded">{error}</div>}
 
@@ -119,6 +120,7 @@ export default function CreateSalesPage() {
           {loading ? 'Submitting...' : 'Generate Sales Page'}
         </Button>
       </form>
+      </div>
     </div>
   );
 }
