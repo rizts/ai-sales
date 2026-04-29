@@ -6,6 +6,7 @@ import Register from './pages/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import CreateSalesPage from './pages/CreateSalesPage';
+import ViewSalesPage from './pages/ViewSalesPage';
 
 function DashboardPlaceholder() {
   const { user, logout } = useAuth();
@@ -19,10 +20,6 @@ function DashboardPlaceholder() {
       <a href="/pages/new" className="inline-block px-4 py-2 text-white bg-blue-600 rounded">Create New Sales Page</a>
     </div>
   );
-}
-
-function ViewPagePlaceholder() {
-  return <div className="p-8">View Page</div>;
 }
 
 function App() {
@@ -48,7 +45,7 @@ function App() {
           
           <Route path="/pages/:id" element={
             <ProtectedRoute>
-              <ViewPagePlaceholder />
+              <ViewSalesPage />
             </ProtectedRoute>
           } />
         </Routes>
