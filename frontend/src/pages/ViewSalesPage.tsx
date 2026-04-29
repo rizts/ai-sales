@@ -119,7 +119,10 @@ export default function ViewSalesPage() {
                 <CardDescription>We encountered an error while generating your sales page.</CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col gap-4">
-                <p>Generation failed. Please try again.</p>
+                <div className="p-3 text-sm text-red-800 bg-red-100 rounded">
+                  {/* @ts-ignore */}
+                  {page.generated_content?.error || 'Generation failed. Please try again.'}
+                </div>
                 <Button onClick={handleRegenerate} className="w-full">Regenerate</Button>
               </CardContent>
             </Card>

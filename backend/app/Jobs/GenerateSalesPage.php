@@ -65,15 +65,28 @@ class GenerateSalesPage implements ShouldQueue
                     ]);
                 } else {
                     Log::error("Failed to parse JSON from LLM: " . $content);
-                    $this->page->update(['status' => 'failed']);
+                    $this->page->update([
+                        'status' => 'failed',
+                        'generated_content' => ['error' => 'Failed to parse AI response into valid JSON']
+                    ]);
                 }
             } else {
                 Log::error("OpenRouter API error: " . $response->body());
-                $this->page->update(['status' => 'failed']);
+                $errorMsg = $response->json('error.message') ?? 'Unknown OpenRouter API Error';
+                if (isset($response->json('error')['metadata']['raw'])) {
+                    $errorMsg = $response->json('error')['metadata']['raw'];
+                }
+                $this->page->update([
+                    'status' => 'failed',
+                    'generated_content' => ['error' => $errorMsg]
+                ]);
             }
         } catch (\Exception $e) {
             Log::error("Exception in GenerateSalesPage job: " . $e->getMessage());
-            $this->page->update(['status' => 'failed']);
+            $this->page->update([
+                'status' => 'failed',
+                'generated_content' => ['error' => $e->getMessage()]
+            ]);
         }
     }
 
