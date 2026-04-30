@@ -21,6 +21,9 @@ RUN apk add --no-cache \
     freetype-dev \
     postgresql-client
 
+# Create log directory for supervisor
+RUN mkdir -p /var/log/supervisor
+
 # Install PHP extensions
 RUN apk add --no-cache --virtual .build-deps \
     $PHPIZE_DEPS \
