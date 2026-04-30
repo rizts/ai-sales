@@ -10,11 +10,9 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-# Run migrations automatically only on API service (not worker)
-if [ "$RUN_WORKER" = "false" ]; then
-    echo "Running database migrations..."
-    php artisan migrate --force
-fi
+# Run migrations automatically
+echo "Running database migrations..."
+php artisan migrate --force
 
 # Start supervisor
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf
