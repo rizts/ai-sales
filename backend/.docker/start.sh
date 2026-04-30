@@ -14,5 +14,9 @@ php artisan view:cache
 echo "Running database migrations..."
 php artisan migrate --force
 
+# Ensure permissions are correct after artisan commands
+chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
 # Start supervisor
 /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.conf

@@ -45,11 +45,11 @@ COPY .docker/supervisor/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # Copy application code
 COPY . .
 
-# Set permissions
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
 # Install dependencies
 RUN composer install --no-dev --optimize-autoloader
+
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
 # Expose port 80
 EXPOSE 80
