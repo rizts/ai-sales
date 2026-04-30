@@ -83,4 +83,4 @@ This is a monorepo containing two main parts:
 
 ## Note on LLM Provider
 
-The application was recently migrated from OpenRouter to **Groq** to eliminate rate-limiting issues and drastically improve generation speed. The model currently in use is `llama3-70b-8192` with `response_format` strictly enforced as JSON to ensure the frontend accurately renders the landing page components.
+The application was recently migrated from OpenRouter to **Groq** to eliminate rate-limiting issues and drastically improve generation speed. The model currently in use is `llama-3.3-70b-versatile` with `response_format` strictly enforced as JSON to ensure the frontend accurately renders the landing page components.

@@ -42,7 +42,7 @@ class GenerateSalesPage implements ShouldQueue
                 'Authorization' => 'Bearer ' . env('GROQ_API_KEY'),
                 'Content-Type' => 'application/json',
             ])->timeout(60)->post('https://api.groq.com/openai/v1/chat/completions', [
-                'model' => 'llama3-70b-8192',
+                'model' => 'llama-3.3-70b-versatile',
                 'response_format' => ['type' => 'json_object'],
                 'messages' => [
                     ['role' => 'system', 'content' => $systemPrompt],
