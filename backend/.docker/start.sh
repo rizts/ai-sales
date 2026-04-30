@@ -10,9 +10,9 @@ php artisan config:cache
 php artisan route:cache
 php artisan view:cache
 
-# Run migrations automatically
-echo "Running database migrations..."
-php artisan migrate --force
+# Run migrations and seeders automatically
+echo "Running database migrations and seeders..."
+php artisan migrate --force --seed
 
 # Ensure permissions are correct after artisan commands
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
