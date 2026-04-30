@@ -39,10 +39,11 @@ class GenerateSalesPage implements ShouldQueue
             $userPrompt = json_encode($this->page->input_data);
 
             $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . env('OPENROUTER_API_KEY'),
+                'Authorization' => 'Bearer ' . env('GROQ_API_KEY'),
                 'Content-Type' => 'application/json',
-            ])->timeout(60)->post('https://openrouter.ai/api/v1/chat/completions', [
-                'model' => 'meta-llama/llama-3.3-70b-instruct:free',
+            ])->timeout(60)->post('https://api.groq.com/openai/v1/chat/completions', [
+                'model' => 'llama3-70b-8192',
+                'response_format' => ['type' => 'json_object'],
                 'messages' => [
                     ['role' => 'system', 'content' => $systemPrompt],
                     ['role' => 'user', 'content' => "Generate copy based on this data: " . $userPrompt],
@@ -71,11 +72,8 @@ class GenerateSalesPage implements ShouldQueue
                     ]);
                 }
             } else {
-                Log::error("OpenRouter API error: " . $response->body());
-                $errorMsg = $response->json('error.message') ?? 'Unknown OpenRouter API Error';
-                if (isset($response->json('error')['metadata']['raw'])) {
-                    $errorMsg = $response->json('error')['metadata']['raw'];
-                }
+                Log::error("Groq API error: " . $response->body());
+                $errorMsg = $response->json('error.message') ?? 'Unknown Groq API Error';
                 $this->page->update([
                     'status' => 'failed',
                     'generated_content' => ['error' => $errorMsg]
